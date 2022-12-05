@@ -1,0 +1,23 @@
+# 
+# Install the MYSQL driver
+#   gem install mysql2
+#
+# Ensure the MySQL gem is defined in your Gemfile
+#   gem 'mysql2'
+development:
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: curriculum
+  username: root
+  password: 
+  socket: /var/run/mysqld/mysqld.sock
+
+production:
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: curriculum
+  username: curriculum
+  password: <%= ENV["CURRICULUM_DATABASE_PASSWORD"] %>
+  socket: /var/run/mysqld/mysqld.sock
