@@ -10,7 +10,7 @@ class ResumesController < ApplicationController
   end
 
   def edit
-  end  
+  end
 
   def create
     @resume = Resume.new(resume_params)

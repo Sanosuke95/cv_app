@@ -1,0 +1,18 @@
+<%= form_with model: resume do |f| %>
+  <div class="mb-3">
+    <%= f.label :name, "Name", class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+    <% @resume.errors.full_messages_for(:name).each do |message| %>
+      <div class="text-danger"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :name, "Info", class: "form-label" %>
+    <%= f.text_area :info, class: "form-control" %>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
+<% end %>

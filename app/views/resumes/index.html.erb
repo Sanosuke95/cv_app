@@ -16,7 +16,7 @@
               <%= resume.name %>
             <% end %>
         </td>
-        <td><%= link_to  "", resume_path(resume), class: "btn btn-primary bi bi-pencil" %></td>
+        <td><%= link_to  "", edit_resume_path(resume), class: "btn btn-primary bi bi-pencil" %></td>
         <td><%= link_to  "", resume_path(resume), class: "btn btn-danger bi bi-x-circle", data: { turbo_method: :delete } %></td>
     </tbody>
   <% end %>
