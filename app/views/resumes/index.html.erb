@@ -1,26 +1,30 @@
 <h1>Resumes</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-  </thead>
-  <% @resumes.each do |resume| %>
-    <tbody>
-        <td><%= resume.id %></td>
-        <td><%= link_to resume_path(resume) do %>
-              <%= resume.name %>
-            <% end %>
-        </td>
-        <td><%= link_to  "", edit_resume_path(resume), class: "btn btn-primary bi bi-pencil" %></td>
-        <td><%= link_to  "", resume_path(resume), class: "btn btn-danger bi bi-x-circle", data: { turbo_method: :delete } %></td>
-    </tbody>
-  <% end %>
-</table>
+<% if @resumes.empty? %>
+  <p>Not data</p>
+<% else %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <% @resumes.each do |resume| %>
+      <tbody>
+          <td><%= resume.id %></td>
+          <td><%= link_to resume_path(resume) do %>
+                <%= resume.name %>
+              <% end %>
+          </td>
+          <td><%= link_to  "", edit_resume_path(resume), class: "btn btn-primary bi bi-pencil" %></td>
+          <td><%= link_to  "", resume_path(resume), class: "btn btn-danger bi bi-x-circle", data: { turbo_method: :delete } %></td>
+      </tbody>
+    <% end %>
+  </table>  
+<% end %>
 
 <%= link_to new_resume_path, class: "btn btn-secondary" do %>
     Add <i class="bi bi-plus-circle"></i>

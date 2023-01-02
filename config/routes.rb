@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
-  resources :resumes
+  resources :resumes do
+    resources :skills
+  end
+
   root 'pages#home'
 end

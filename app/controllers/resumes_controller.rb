@@ -3,6 +3,7 @@ class ResumesController < ApplicationController
 
   def index
     @resumes = Resume.all
+    puts @resumes.empty?
   end
 
   def new
@@ -15,7 +16,7 @@ class ResumesController < ApplicationController
   def create
     @resume = Resume.new(resume_params)
     if @resume.save
-      redirect_to resumes_path
+      redirect_to @resume
     else
       flash[:error] = 'Something went wrong'
       render 'new', status: :unprocessable_entity
@@ -25,7 +26,7 @@ class ResumesController < ApplicationController
   def update
     if @resume.update(resume_params)
       flash[:success] = "Object was successfully updated"
-      redirect_to @object
+      redirect_to @resume
     else
       flash[:error] = "Something went wrong"
       render 'edit'
@@ -37,7 +38,7 @@ class ResumesController < ApplicationController
 
     redirect_to resumes_path, status: :see_other
   end
-  
+
   private
 
   def resume_params
