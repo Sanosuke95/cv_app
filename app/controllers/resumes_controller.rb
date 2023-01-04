@@ -16,7 +16,7 @@ class ResumesController < ApplicationController
   def create
     @resume = Resume.new(resume_params)
     if @resume.save
-      redirect_to @resume
+      redirect_to new_resume_skill_path(@resume)
     else
       flash[:error] = 'Something went wrong'
       render 'new', status: :unprocessable_entity

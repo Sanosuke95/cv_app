@@ -1,1 +1,32 @@
-<h1>Skill</h1>
+<h1>New Skill</h1>
+
+<%= render 'skills/shared/form', skill: [ @resume, @resume.skills.build ] %>
+
+<h2>Skills list</h2>
+
+  
+<% if @resume.skills.any? %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>level</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @skills.each do |skill| %>
+          <tr>
+            <td><%= skill.id %></td>
+            <td><%= skill.name %></td>
+            <td><%= skill.level %></td>
+            <td><%= link_to 'delete', resume_skill_path(skill.resume, skill), data: {turbo_method: :delete}, class: 'btn btn-danger', type: "button" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+<% end %>
