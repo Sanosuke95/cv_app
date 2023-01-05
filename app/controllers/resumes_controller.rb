@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ResumesController < ApplicationController
   before_action :set_resume, only: [:show, :edit, :update, :destroy]
 
@@ -10,8 +11,7 @@ class ResumesController < ApplicationController
     @resume = Resume.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @resume = Resume.new(resume_params)
@@ -25,17 +25,14 @@ class ResumesController < ApplicationController
 
   def update
     if @resume.update(resume_params)
-      flash[:success] = "Object was successfully updated"
       redirect_to @resume
     else
-      flash[:error] = "Something went wrong"
       render 'edit'
     end
   end
 
   def destroy
     @resume.destroy
-
     redirect_to resumes_path, status: :see_other
   end
 
