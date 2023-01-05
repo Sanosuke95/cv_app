@@ -1,11 +1,10 @@
 # The second controller for skill 
 class SkillsController < ApplicationController
-  before_action :set_skill, only: [:show, :edit, :update, :destroy]
   before_action :set_resume
+  before_action :set_skill, only: [:show, :edit, :update, :destroy]
 
   def new
     @skill = Skill.new
-    @skills = @resume.skills.all
   end
 
   def create
