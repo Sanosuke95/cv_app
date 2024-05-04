@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -39,7 +38,10 @@ class AuthController extends Controller
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password'])
+                'password' => Hash::make($validated['password']),
+                'firstname' => $validated['firstname'],
+                'lastname' => $validated['lastname'],
+                'active' => $validated['active']
             ]);
 
             return response()->json([
