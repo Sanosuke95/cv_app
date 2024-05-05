@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Resume extends Model
+class Skill extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'info',
-        'user_id'
+        'level',
+        'user_id',
+        'resume_id'
     ];
 
     public function users(): BelongsTo
@@ -22,8 +22,8 @@ class Resume extends Model
         return $this->belongsTo(User::class, 'foreign_key', 'user_id');
     }
 
-    public function skills(): HasMany
+    public function resumes(): BelongsTo
     {
-        return $this->hasMany(Skill::class);
+        return $this->belongsTo(Resume::class, 'foreign_key', 'resume_id');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\ResumeController;
+use App\Http\Controllers\SkillController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,6 +13,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/resumes', ResumeController::class);
+    Route::apiResource('/skills', SkillController::class);
     Route::prefix('user')->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
         Route::post('logout', [AuthController::class, 'logout']);
