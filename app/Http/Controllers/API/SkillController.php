@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSkillRequest;
 use App\Http\Requests\UpdateSkillRequest;
+use App\Models\Resume;
 use App\Models\Skill;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -25,20 +28,21 @@ class SkillController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Resume $resume)
     {
-        $skills = Skill::all()->where('user_id', '=', $this->user['id']);
+        $skills = Skill::all()->where('resume_id', '=', $resume->id);
         return response()->json($skills, 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSkillRequest $request)
+    public function store(Resume $resume, StoreSkillRequest $request)
     {
         try {
             $validated = $request->all();
             $validated['user_id'] = $this->user['id'];
+            $validated['resume_id'] = $resume->id;
             if ($validated['level'] == NULL) $validated['level'] = 1;
             $skill = Skill::create($validated);
 
@@ -53,7 +57,7 @@ class SkillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Skill $skill)
+    public function show(Resume $resume, Skill $skill)
     {
         return response()->json($skill);
     }
@@ -61,7 +65,7 @@ class SkillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSkillRequest $request, Skill $skill)
+    public function update(UpdateSkillRequest $request, Resume $resume, Skill $skill)
     {
         try {
             $validated = $request->all();
@@ -77,7 +81,7 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Skill $skill)
+    public function destroy(Resume $resume, Skill $skill)
     {
         $skill->delete();
         return response()->json(['message' => 'skill delete']);

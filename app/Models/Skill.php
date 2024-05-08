@@ -17,12 +17,12 @@ class Skill extends Model
         'resume_id'
     ];
 
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'foreign_key', 'user_id');
     }
 
-    public function resumes(): BelongsTo
+    public function resume(): BelongsTo
     {
         return $this->belongsTo(Resume::class, 'foreign_key', 'resume_id');
     }
