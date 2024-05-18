@@ -3,16 +3,18 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSkillRequest;
+use App\Http\Requests\StoreExperienceRequest;
+use App\Http\Requests\UpdateExperienceRequest;
 use App\Http\Requests\UpdateSkillRequest;
+use App\Models\Experience;
 use App\Models\Resume;
-use App\Models\Skill;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
-class SkillController extends Controller
+class ExperienceController extends Controller
 {
+
     /**
      * get current user
      * 
@@ -29,23 +31,22 @@ class SkillController extends Controller
      */
     public function index(Resume $resume)
     {
-        $skills = Skill::all()->where('resume_id', '=', $resume->id);
-        return response()->json($skills, 200);
+        $experiences = Experience::all()->where('resume_id', '=', $resume->id);
+        return response()->json($experiences, 200);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Resume $resume, StoreSkillRequest $request)
+    public function store(Resume $resume, StoreExperienceRequest $request)
     {
         try {
             $validated = $request->all();
             $validated['user_id'] = $this->user['id'];
             $validated['resume_id'] = $resume->id;
-            if ($validated['level'] == NULL) $validated['level'] = 1;
-            $skill = Skill::create($validated);
+            $skill = Experience::create($validated);
 
-            return response()->json(['message' => 'skill create', $skill], 200);
+            return response()->json(['message' => 'experience create', $skill], 200);
         } catch (ValidationException $e) {
             return response()->json(['error' => 'Validation error', 'message' => $e->errors()], 422);
         } catch (Exception $e) {
@@ -56,20 +57,21 @@ class SkillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Resume $resume, Skill $skill)
+    public function show(Resume $resume, Experience $experience)
     {
-        return response()->json($skill);
+        return response()->json($experience);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSkillRequest $request, Resume $resume, Skill $skill)
+    public function update(Resume $resume, UpdateExperienceRequest $request, Experience $experience)
     {
         try {
             $validated = $request->all();
-            $skill->update($validated);
-            return response()->json(['message' => 'skill update'], 200);
+            $experience->update($validated);
+            return response()->json(['message' => 'experience update'], 200);
+
         } catch (ValidationException $e) {
             return response()->json(['error' => 'Validation error', 'message' => $e->errors()], 422);
         } catch (Exception $e) {
@@ -80,9 +82,9 @@ class SkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Resume $resume, Skill $skill)
+    public function destroy(Resume $resume, Experience $experience)
     {
-        $skill->delete();
-        return response()->json(['message' => 'skill delete']);
+        $experience->delete();
+        return response()->json(['message' => 'experience delete']);
     }
 }
