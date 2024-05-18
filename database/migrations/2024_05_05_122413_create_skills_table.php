@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
-            $table->integer('level');
+            $table->integer('level')->nullable(false);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('resume_id');
             $table->timestamps();

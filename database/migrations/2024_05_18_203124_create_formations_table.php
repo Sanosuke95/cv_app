@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('experiences', function (Blueprint $table) {
+        Schema::create('formations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false);
             $table->text('description')->nullable(true);
             $table->date('begin')->nullable(true);
             $table->date('end')->nullable(true);
             $table->string('location')->nullable(true);
-            $table->string('formation')->nullable(true);
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('resume_id');
             $table->timestamps();
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('experiences');
+        Schema::dropIfExists('formations');
     }
 };
