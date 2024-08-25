@@ -13,6 +13,7 @@ Route::apiResource('/contact', ContactController::class)->only(['store', 'index'
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/data', [ContactController::class, 'getData']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/resumes', ResumeController::class);
     Route::prefix('resumes/{resume:id}')->group(function () {

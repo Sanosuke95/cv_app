@@ -1,24 +1,37 @@
-import { useState } from "react";
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import Layout from "../components/layout/Layout";
+import AuthService from "../services/Auth.service";
 
-function Home(props) {
-    const [color, setColor] = useState('red');
-    axios.get('contact').then(function (response) {
-        console.log('Les élément qui sont utilisé');
-        console.log(response);
-        console.log(localStorage.getItem('token'));
-        console.log('Fin des élément');
-    }).catch(function (error) {
-        console.log(error);
-    });
+function Home() {
+    const [color, setColor] = useState('red')
+    const authService = new AuthService();
+
+    const handleSubmit = () => {
+        authService.profile().then((response) => {
+            console.log(response);
+        }).catch(function (error) {
+            localStorage.removeItem('key');
+        })
+    };
+
+    useEffect(() => {
+        return () => {
+            console.log(localStorage.getItem('key'));
+        };
+    }, []);
 
     return (
         <>
-            <h1>Home Page</h1>
-            <p>My color is {color}</p>
-            <button type='button' onClick={() => setColor('blue')}>{color}</button>
+            <Layout>
+                <h1>Home Page</h1>
+                <p>My color is {color}</p>
+                <i className="bi bi-person-circle"></i>
+                <button type='button' onClick={() => setColor('blue')}>{color}</button>
+                <button type="button" onClick={handleSubmit}>Submit</button>
+
+            </Layout>
         </>
-    );
+    )
 }
 
 export default Home;

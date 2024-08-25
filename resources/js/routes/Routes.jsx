@@ -5,8 +5,10 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import Home from '../pages/Home';
-import Login from '../pages/Login';
+import Login from '../auth/Login';
 import Profile from '../pages/Profile';
+import Register from '../auth/Register';
+import Nav from '../components/nav/Nav';
 
 
 function Router() {
@@ -18,6 +20,10 @@ function Router() {
         {
             path: "/login",
             element: <Login />,
+        },
+        {
+            path: "/register",
+            element: <Register />
         },
         {
             path: "/profile",
