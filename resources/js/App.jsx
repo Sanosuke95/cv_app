@@ -14,7 +14,6 @@ if (localStorage.getItem('token')) {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <Nav />
         <Router />
     </React.StrictMode>
 );

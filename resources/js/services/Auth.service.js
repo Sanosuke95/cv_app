@@ -20,6 +20,14 @@ class AuthService {
     profile() {
         return http.get(`${this.prefix}/user/profile`);
     }
+
+    check() {
+        return http.get(`${this.prefix}/checkUser`);
+    }
+
+    logout() {
+        return http.delete(`${this.prefix}/user/delete`);
+    }
 }
 
 export default AuthService;
