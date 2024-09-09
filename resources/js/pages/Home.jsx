@@ -1,11 +1,11 @@
+import Layout from "../components/layout/Layout";
 
 function Home() {
 
     return (
-        <>
+        <Layout>
             <h1>Home Page</h1>
-            <p>My color is</p>
-        </>
+        </Layout>
     )
 }
 
