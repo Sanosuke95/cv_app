@@ -1,8 +1,9 @@
 
-const Input = (children, type) => {
+const Input = ({ type }) => {
     return (
         <input
             type={type}
-            className="form-control">{children}</input>
+            className="form-control" />
     );
 }
+export default Input;

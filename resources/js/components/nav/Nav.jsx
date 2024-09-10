@@ -7,9 +7,9 @@ const NavLoggedIn = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-primary">
             <div className="container">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a className="navbar-brand" href="#">Navbar</a>
                 <div className="navbar-collapse">
-                    <ul class="navbar-nav">
+                    <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
