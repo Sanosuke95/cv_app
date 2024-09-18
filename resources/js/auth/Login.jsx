@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from "../components/button/Button";
 import Form from "../components/form/Form";
 import Input from "../components/input/Input";
@@ -5,22 +6,32 @@ import Label from "../components/label/Label";
 import Layout from "../components/layout/Layout";
 
 function Login() {
-    const handleSubmit = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState();
+    const handleSubmit = (e) => {
+        e.preventDefault();
         console.log('Première validation');
-        alert('Première validation');
+        console.log(email);
+        console.log(password);
     }
     return (
         <Layout>
             <Form handleSubmit={handleSubmit}>
                 <div className="mb-3">
                     <Label>Email</Label>
-                    <Input type="email" />
+                    <Input
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="mb-3">
                     <Label>Password</Label>
-                    <Input type="password" />
+                    <Input
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <Button type={"submit"} className={"btn btn-primary"}>Submit</Button>
+                <div style={{ textAlign: 'center' }}>
+                    <Button type={"submit"} className={"btn btn-primary"}>Submit</Button>
+                </div>
             </Form>
         </Layout>
     );
