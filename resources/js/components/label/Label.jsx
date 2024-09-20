@@ -1,7 +1,9 @@
 
-const Label = ({ children }) => {
+const Label = ({ children, className, htmlFor }) => {
     return (
-        <label htmlFor="inputLabel" className="form-label">{children}</label>
+        <label
+            htmlFor={htmlFor}
+            className={className}> {children}</label >
     );
 }
 
