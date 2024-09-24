@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Divider from "../divider/Divider";
 const Nav = ({ isLogged }) => {
     return NavLoggedIn();
 }
@@ -9,7 +10,7 @@ const NavLoggedIn = () => {
             <div className="container">
                 <a className="navbar-brand" href="#">Navbar</a>
                 <div className="navbar-collapse">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
@@ -20,10 +21,22 @@ const NavLoggedIn = () => {
                             <Link className="nav-link" to="/about">About</Link>
                         </li>
                     </ul>
+
+                    <ul className="navbar-nav">
+                        <li className="nav-item dropdown">
+                            <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i className="bi bi-person-circle h-6"></i>
+                            </Link>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to="/login">Login</Link></li>
+                                <Divider />
+                                <li><Link className="dropdown-item" to="/register">Register</Link></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
-
     );
 }
 
