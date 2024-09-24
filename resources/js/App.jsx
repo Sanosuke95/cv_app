@@ -8,6 +8,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import About from './pages/About';
 import router from './routes/routes';
 
+import "./app.css";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <RouterProvider router={router} />
