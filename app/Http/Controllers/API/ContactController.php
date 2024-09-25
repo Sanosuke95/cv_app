@@ -58,4 +58,9 @@ class ContactController extends Controller
         $contact->delete();
         return response()->json(['message' => 'Message deleted'], 204);
     }
+
+    public function getData()
+    {
+        return response()->json(['message' => 'Retour de valeur pour react'], 200);
+    }
 }

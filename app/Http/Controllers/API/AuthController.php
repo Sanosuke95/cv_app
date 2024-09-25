@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -57,6 +58,7 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
+
         return $request->user();
     }
 
@@ -71,5 +73,10 @@ class AuthController extends Controller
         $request->user()->delete();
         $request->user()->currentAccessToken()->delete();
         return response(['message' => 'This user has been destroy'], 200);
+    }
+
+    public function checkLogged(Request $request)
+    {
+        return $request->user();
     }
 }
