@@ -8,7 +8,7 @@ const NavLoggedIn = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-primary">
             <div className="container">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <Link className="navbar-brand" to="/">CV_App</Link>
                 <div className="navbar-collapse">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
@@ -25,7 +25,7 @@ const NavLoggedIn = () => {
                     <ul className="navbar-nav">
                         <li className="nav-item dropdown">
                             <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i className="bi bi-person-circle h-6"></i>
+                                <i className="bi bi-person-circle"></i>
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link className="dropdown-item" to="/login">Login</Link></li>
