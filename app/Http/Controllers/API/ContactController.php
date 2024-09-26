@@ -7,6 +7,7 @@ use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
 use App\Models\Contact;
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class ContactController extends Controller
@@ -17,6 +18,7 @@ class ContactController extends Controller
     public function index()
     {
         $contact = Contact::all();
+        Log::info('Voici un test des logs');
         return response()->json($contact, 200);
     }
 

@@ -5,8 +5,10 @@ import Input from "../components/input/Input";
 import Label from "../components/label/Label";
 import Layout from "../components/layout/Layout";
 import CardForm from '../components/card/CardForm';
+import AuthService from '../services/Auth.service';
 
 function Login() {
+    const apiClient = new AuthService();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState();
     const handleSubmit = (e) => {
@@ -14,6 +16,10 @@ function Login() {
         console.log('Première validation');
         console.log(email);
         console.log(password);
+
+        apiClient.contact().then(function (response) {
+            console.log(response.status);
+        })
     }
     return (
         <Layout>

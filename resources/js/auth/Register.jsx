@@ -7,6 +7,8 @@ import Button from '../components/button/Button';
 import Checkbox from '../components/checkbox/Checkbox';
 import CardForm from '../components/card/CardForm';
 
+import AuthService from '../services/Auth.service';
+
 
 function Register() {
     const [name, setName] = useState();
@@ -16,14 +18,30 @@ function Register() {
     const [lastname, setLastname] = useState();
     const [active, setActive] = useState(true);
 
+    const authService = new AuthService();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(name);
-        console.log(email);
-        console.log(password);
-        console.log(firstname);
-        console.log(lastname);
-        console.log(active);
+        const data = {
+            name: name,
+            email: email,
+            password: password,
+            firstname: firstname,
+            lastname: lastname,
+            active: 1
+        }
+
+        console.log(data);
+
+        authService.login(data).then(function (response) {
+            if (response.status == 200 && response.data != null) {
+                nav('/');
+            } else {
+                console.log('Erreur lors de la création des utilisateurs');
+            }
+        }).catch(function (error) {
+            console.log(error.message);
+        })
     }
 
     const handleActive = () => {

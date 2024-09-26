@@ -36,6 +36,7 @@ class AuthController extends Controller
         try {
             $validated = $request->all();
 
+            Log::notice($validated);
             $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
@@ -44,6 +45,8 @@ class AuthController extends Controller
                 'lastname' => $validated['lastname'],
                 'active' => $validated['active']
             ]);
+
+            Log::info('Info de l\'utilisateur : ' . $user);
 
             return response()->json([
                 'user' => $user,
