@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from "../components/form/Form";
 import Layout from "../components/layout/Layout";
 import Label from "../components/label/Label";
@@ -19,6 +20,7 @@ function Register() {
     const [active, setActive] = useState(true);
 
     const authService = new AuthService();
+    const nav = new useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,7 +35,11 @@ function Register() {
 
         console.log(data);
 
-        authService.login(data).then(function (response) {
+        // authService.contact().then(function (response) {
+        //     console.log(response)
+        // })
+
+        authService.register(data).then(function (response) {
             if (response.status == 200 && response.data != null) {
                 nav('/');
             } else {

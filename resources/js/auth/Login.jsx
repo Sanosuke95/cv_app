@@ -6,19 +6,31 @@ import Label from "../components/label/Label";
 import Layout from "../components/layout/Layout";
 import CardForm from '../components/card/CardForm';
 import AuthService from '../services/Auth.service';
+import http from "../utils/http-common.js";
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
-    const apiClient = new AuthService();
+
+    const authService = new AuthService();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState();
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Première validation');
-        console.log(email);
-        console.log(password);
 
-        apiClient.contact().then(function (response) {
-            console.log(response.status);
+    const nav = new useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const data = {
+            email: email,
+            password: password
+        };
+
+        authService.login(data).then(function (response) {
+            if (response.status == 200) {
+                console.log(data);
+                localStorage.setItem('key', response.data?.token);
+            } else {
+                console.log(response.status)
+            }
         })
     }
     return (
