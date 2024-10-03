@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,8 +28,18 @@ class AuthController extends Controller
              * @var  \App\Models\User $user
              * */
             $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
-            return response()->json(['token' => $token], 200);
+            $date = new DateTime();
+            $token = $user->createToken(
+                'authToken',
+                ['*'],
+                $date
+            )->accessToken;
+            Log::info($token);
+
+            return response()->json([
+                'token' => $token['token'],
+                'expire_at' => $token['expires_at']
+            ], 200);
         }
 
         return response()->json(['message' => 'invalid credentials'], 401);
