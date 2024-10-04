@@ -8,7 +8,6 @@ import CardForm from '../components/card/CardForm';
 import AuthService from '../services/Auth.service';
 import http from "../utils/http-common.js";
 import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode';
 
 
 function Login() {
@@ -27,10 +26,12 @@ function Login() {
 
         authService.login(data).then(function (response) {
             if (response.status == 200) {
-                console.log(data);
                 localStorage.setItem('key', response.data?.expire_at);
-                console.log(localStorage.getItem('key'));
-                console.log(response);
+                var date = new Date(localStorage.getItem('key'));
+                var now = new Date();
+                now.setDate(now.getDate() + 2);
+                console.log(date.toLocaleString('fr-Fr'));
+                console.log(now.toLocaleString('fr-Fr'));
 
             } else {
                 console.log(response.status)

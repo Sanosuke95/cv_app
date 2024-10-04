@@ -32,7 +32,7 @@ class AuthController extends Controller
             $token = $user->createToken(
                 'authToken',
                 ['*'],
-                $date
+                $date->modify(' +1 day')
             )->accessToken;
             Log::info($token);
 
