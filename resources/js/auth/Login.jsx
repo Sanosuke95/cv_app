@@ -6,8 +6,9 @@ import Label from "../components/label/Label";
 import Layout from "../components/layout/Layout";
 import CardForm from '../components/card/CardForm';
 import AuthService from '../services/Auth.service';
-import http from "../utils/http-common.js";
 import { useNavigate } from 'react-router-dom';
+import Storage from '../services/Storage.service.js';
+import http from "../utils/http-common.js";
 
 
 function Login() {
@@ -17,6 +18,7 @@ function Login() {
     const [password, setPassword] = useState();
 
     const nav = new useNavigate();
+    const storage = new Storage();
     const handleSubmit = (e) => {
         e.preventDefault()
         const data = {
@@ -26,18 +28,17 @@ function Login() {
 
         authService.login(data).then(function (response) {
             if (response.status == 200) {
-                localStorage.setItem('key', response.data?.expire_at);
-                var date = new Date(localStorage.getItem('key'));
-                var now = new Date();
-                now.setDate(now.getDate() + 2);
-                console.log(date.toLocaleString('fr-Fr'));
-                console.log(now.toLocaleString('fr-Fr'));
-
+                storage.add('token', response.data?.expire_at);
+                storage.add('expireAt', response.data?.expire_at);
+                http.defaults.headers.common['Authorization'] = `Bearer ${storage.get('token')}`;
+                nav('/');
             } else {
                 console.log(response.status)
             }
         })
     }
+
+
     return (
         <Layout>
             <div className='child'>
