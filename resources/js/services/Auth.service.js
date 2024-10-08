@@ -14,6 +14,10 @@ class AuthService {
         return http.post(`${this.prefix}/register`, data);
     }
 
+    logOut() {
+        return http.delete(`${this.logOut}/user/logout`);
+    }
+
     contact() {
         return http.get(`${this.prefix}/contact`);
     }

@@ -33,12 +33,6 @@ function Register() {
             active: 1
         }
 
-        console.log(data);
-
-        // authService.contact().then(function (response) {
-        //     console.log(response)
-        // })
-
         authService.register(data).then(function (response) {
             if (response.status == 200 && response.data != null) {
                 nav('/');

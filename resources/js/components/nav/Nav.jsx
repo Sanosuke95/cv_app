@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
-import Divider from "../divider/Divider";
-const Nav = ({ isLogged }) => {
-    return NavLoggedIn();
-}
+import { useEffect } from "react";
+import LoggedIn from "./LoggedIn";
+import Storage from "../../services/Storage.service";
+import LoggedOut from "./LoggedOut";
 
-const NavLoggedIn = () => {
+const Nav = () => {
+    const storage = new Storage();
+    let isLogged = false;
+    useEffect(() => {
+        return () => {
+            const token = storage.get('token');
+            console.log(token);
+            if (token !== null) {
+                isLogged = true;
+            }
+        };
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg bg-primary">
             <div className="container">
@@ -21,19 +33,7 @@ const NavLoggedIn = () => {
                             <Link className="nav-link" to="/about">About</Link>
                         </li>
                     </ul>
-
-                    <ul className="navbar-nav">
-                        <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i className="bi bi-person-circle"></i>
-                            </Link>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/login">Login</Link></li>
-                                <Divider />
-                                <li><Link className="dropdown-item" to="/register">Register</Link></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    {isLogged ? <LoggedOut /> : <LoggedIn />}
                 </div>
             </div>
         </nav>

@@ -12,6 +12,11 @@ class Storage {
         return localStorage.setItem(key, value);
     }
 
+    delete(key) {
+        console.log('delete token');
+        return localStorage.removeItem(key);
+    }
+
     checkTokenExpiration() {
         var date = new Date(this.get('expireAt'));
         var now = new Date();
@@ -19,6 +24,15 @@ class Storage {
         now.setDate(now.getDate() + 2);
         console.log(date.toLocaleString('fr-Fr'));
         console.log(now.toLocaleString('fr-Fr'));
+    }
+
+    removeAllToken() {
+        let $items = ['expireAt', 'token']
+        $items.forEach(element => {
+            localStorage.removeItem(element);
+        });
+
+        return;
     }
 }
 

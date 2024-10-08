@@ -28,7 +28,9 @@ function Login() {
 
         authService.login(data).then(function (response) {
             if (response.status == 200) {
-                storage.add('token', response.data?.expire_at);
+                storage.removeAllToken();
+                http.defaults.headers.common['Authorization'] = '';
+                storage.add('token', response.data?.token);
                 storage.add('expireAt', response.data?.expire_at);
                 http.defaults.headers.common['Authorization'] = `Bearer ${storage.get('token')}`;
                 nav('/');
