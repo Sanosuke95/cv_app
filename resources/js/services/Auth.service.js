@@ -15,7 +15,7 @@ class AuthService {
     }
 
     logOut() {
-        return http.delete(`${this.logOut}/user/logout`);
+        return http.delete(`${this.prefix}/user/logout`);
     }
 
     contact() {

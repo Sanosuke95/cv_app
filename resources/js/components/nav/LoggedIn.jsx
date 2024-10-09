@@ -1,3 +1,4 @@
+import AuthService from "../../services/Auth.service";
 import Storage from "../../services/Storage.service";
 import Button from "../button/Button";
 import Divider from "../divider/Divider";
@@ -5,6 +6,11 @@ import { Link } from "react-router-dom";
 
 const LoggedIn = () => {
     const storage = new Storage();
+    const authService = new AuthService();
+    const handleSubmit = () => {
+        storage.delete();
+        authService.logOut();
+    }
     return (
         <ul className="navbar-nav" >
             <li className="nav-item dropdown">
@@ -16,7 +22,7 @@ const LoggedIn = () => {
                     <li><Link className="dropdown-item" to="">Profile</Link></li>
                     <li><Link className="dropdown-item" to="">Settings</Link></li>
                     <Divider />
-                    <li><Button className="dropdown-item" onClick={storage.delete}>Log out</Button></li>
+                    <li><Button className="dropdown-item" onClick={handleSubmit}>Log out</Button></li>
                 </ul>
             </li>
         </ul >

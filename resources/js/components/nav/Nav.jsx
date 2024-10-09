@@ -1,19 +1,20 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import LoggedIn from "./LoggedIn";
 import Storage from "../../services/Storage.service";
 import LoggedOut from "./LoggedOut";
 
 const Nav = () => {
     const storage = new Storage();
-    let isLogged = false;
+    const [isLogged, setIsLogged] = useState(false);
     useEffect(() => {
         return () => {
             const token = storage.get('token');
             console.log(token);
             if (token !== null) {
-                isLogged = true;
+                setIsLogged(true);
             }
+            console.log(isLogged);
         };
     }, []);
 
@@ -33,7 +34,7 @@ const Nav = () => {
                             <Link className="nav-link" to="/about">About</Link>
                         </li>
                     </ul>
-                    {isLogged ? <LoggedOut /> : <LoggedIn />}
+                    {isLogged ? <LoggedIn /> : <LoggedOut />}
                 </div>
             </div>
         </nav>
