@@ -21,6 +21,10 @@ class AuthService {
     contact() {
         return http.get(`${this.prefix}/contact`);
     }
+
+    profile() {
+        return http.get(`${this.prefix}/user/profile`);
+    }
 }
 
 export default AuthService;

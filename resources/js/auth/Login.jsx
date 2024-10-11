@@ -32,8 +32,7 @@ function Login() {
                 http.defaults.headers.common['Authorization'] = '';
                 storage.add('token', response.data?.token);
                 storage.add('expireAt', response.data?.expire_at);
-                http.defaults.headers.common['Authorization'] = `Bearer ${storage.get('token')}`;
-                console.log(http.defaults.headers.common['Authorization']);
+                http.defaults.headers.common['Authorization'] = `Bearer ${response.data?.token}`;
                 nav('/');
             } else {
                 console.log(response.status)
